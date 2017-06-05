@@ -2,15 +2,15 @@
 
 ## Running tests
 
-* Tests are run with [GNU Make](https://www.gnu.org/software/make/). Please install it
-if you don't have it installed. Most OS X and Linux machines should have `make` installed.
+Tests are run with [GNU Make](https://www.gnu.org/software/make/). Please install it
+if you don't have it installed. Most OS X and Linux machines should have `make` out of the box.
 
-* From the root of the project directory, running:
-  `$ make` will run all tests.
+```bash
+$ make bootstrap # will install tools needed to run tests
+$ make # runs all tests and checks
+```
 
-* For more stuff, see the `Makefile`.
-
-Most of the `Makefile` and associated scripts have been adapted from 
+For more stuff, see the Makefile. Makefile and associated scripts have been adapted from 
 [hashicorp/vault/Makefile](https://github.com/hashicorp/vault/blob/master/Makefile).
 
 ## LICENSE
