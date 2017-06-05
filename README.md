@@ -10,6 +10,9 @@ if you don't have it installed. Most OS X and Linux machines should have `make` 
 
 * For more stuff, see the `Makefile`.
 
+Most of the `Makefile` and associated scripts have been adapted from 
+[hashicorp/vault/Makefile](https://github.com/hashicorp/vault/blob/master/Makefile).
+
 ## LICENSE
 
 This is free and unencumbered software released into the public domain.
