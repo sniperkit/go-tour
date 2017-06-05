@@ -1,5 +1,15 @@
 # Exercises from [A Tour of Go](https://tour.golang.org/)
 
+## Running tests
+
+* Tests are run with [GNU Make](https://www.gnu.org/software/make/). Please install it
+if you don't have it installed. Most OS X and Linux machines should have `make` installed.
+
+* From the root of the project directory, running:
+  `$ make` will run all tests.
+
+* For more stuff, see the `Makefile`.
+
 ## LICENSE
 
 This is free and unencumbered software released into the public domain.
