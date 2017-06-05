@@ -1,4 +1,5 @@
 # Exercises from [A Tour of Go](https://tour.golang.org/)
+[![Build Status](https://travis-ci.org/sahilm/go-tour.svg?branch=master)](https://travis-ci.org/sahilm/go-tour)
 
 ## Running tests
 
