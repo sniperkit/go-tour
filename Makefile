@@ -8,7 +8,6 @@ all: goimportscheck vet test
 test: goimportscheck
 	@sh -c "'$(CURDIR)/scripts/test.sh'"
 
-
 goimports:
 	goimports -w $(GOIMPORTS_FILES)
 
