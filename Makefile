@@ -9,7 +9,7 @@ test: goimportscheck
 	@sh -c "'$(CURDIR)/scripts/test.sh'"
 
 goimports:
-	goimports -w $(GOIMPORTS_FILES)
+	@goimports -w $(GOIMPORTS_FILES)
 
 goimportscheck:
 	@sh -c "'$(CURDIR)/scripts/goimportscheck.sh'"
