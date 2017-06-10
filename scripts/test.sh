@@ -8,27 +8,22 @@ WORKDIR=coverage
 PROFILE="$WORKDIR/cover.out"
 MODE=count
 
-generate_cover_data() {
+test_and_cover() {
     rm -rf "$WORKDIR"
     mkdir -p "$WORKDIR"
 
     for pkg in "$@"; do
         f="$WORKDIR/$(echo $pkg | tr / -).cover"
-        go test -covermode="$MODE" -coverprofile="$f" "$pkg"
+        go test -v -covermode="$MODE" -coverprofile="$f" "$pkg"
     done
 
     echo "mode: $MODE" >"$PROFILE"
     grep -h -v "^mode:" "$WORKDIR"/*.cover >>"$PROFILE"
 }
 
-run_tests() {
-    go test -v $(go list ./...)
-}
-
-show_cover_report() {
+generate_html_cover_report() {
     go tool cover -html="$PROFILE" -o "$WORKDIR"/index.html
 }
 
-run_tests
-generate_cover_data $(go list ./...)
-show_cover_report
+test_and_cover $(go list ./...)
+generate_html_cover_report
