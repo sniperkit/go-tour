@@ -1,4 +1,4 @@
-package sqrt
+package loopsandfunctions
 
 import "math"
 
