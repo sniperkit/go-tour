@@ -1,7 +1,6 @@
 package loopsandfunctions_test
 
 import (
-	"fmt"
 	"math"
 	"testing"
 
@@ -16,7 +15,7 @@ func TestSqrt(t *testing.T) {
 		if got != want {
 			t.Errorf("Sqrt(%f) == %f, want %f", c, got, want)
 		} else {
-			fmt.Printf("sqrt(%.3f) == %.14f in %d iterations\n", c, got, iterations)
+			t.Logf("sqrt(%.3f) == %.14f in %d iterations\n", c, got, iterations)
 		}
 	}
 }
