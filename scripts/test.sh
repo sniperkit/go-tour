@@ -14,7 +14,7 @@ test_and_cover() {
 
     for pkg in "$@"; do
         f="$WORKDIR/$(echo $pkg | tr / -).cover"
-        go test -v -covermode="$MODE" -coverprofile="$f" "$pkg"
+        go test -covermode="$MODE" -coverprofile="$f" "$pkg"
     done
 
     echo "mode: $MODE" >"$PROFILE"
