@@ -5,8 +5,11 @@ EXTERNAL_TOOLS=\
 
 all: goimportscheck vet test
 
-test: goimportscheck
-	@sh -c "'$(CURDIR)/scripts/test.sh'"
+cover: goimportscheck vet
+	@sh -c "'$(CURDIR)/scripts/cover.sh'"
+
+test:
+	@go test ./...
 
 goimports:
 	@goimports -w $(GOIMPORTS_FILES)
@@ -27,4 +30,4 @@ bootstrap:
 		go get -u $$tool; \
 	done
 
-.PHONY: all test goimports goimportscheck vet bootstrap
+.PHONY: all cover test goimports goimportscheck vet bootstrap
