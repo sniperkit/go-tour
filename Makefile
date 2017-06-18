@@ -3,7 +3,7 @@ EXTERNAL_TOOLS=\
 	golang.org/x/tools/cmd/goimports \
 	golang.org/x/tools/cmd/cover
 
-all: goimportscheck vet cover
+all: goimportscheck vet test
 
 cover: goimportscheck vet
 	@sh -c "'$(CURDIR)/scripts/cover.sh'"
