@@ -11,6 +11,9 @@ func TestMyReaderReturnsAStreamOfAs(t *testing.T) {
 	i, o := 0, 0
 	for ; i < 1<<20 && o < 1<<20; i++ { // test 1mb
 		n, err := readers.MyReader{}.Read(b)
+		if n != 1024 {
+			t.Errorf("invalid read length: %v, want %v", n, 1024)
+		}
 		for i, v := range b[:n] {
 			if v != 'A' {
 				t.Errorf("got byte %x at offset %v, want 'A'\n", v, o+i)
