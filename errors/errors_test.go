@@ -13,8 +13,8 @@ func TestSqrtErrors(t *testing.T) {
 		want         float64
 		errorMessage string
 	}{
-		{-2, 0, "cannot Sqrt negative number: -2"},
-		{-100, 0, "cannot Sqrt negative number: -100"},
+		{-2, 0, "cannot sqrt negative number: -2"},
+		{-100, 0, "cannot sqrt negative number: -100"},
 		{2, math.Sqrt(2), ""},
 	}
 

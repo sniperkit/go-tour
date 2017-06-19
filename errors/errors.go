@@ -8,7 +8,7 @@ import (
 type ErrNegativeSqrt float64
 
 func (e ErrNegativeSqrt) Error() string {
-	return "cannot Sqrt negative number: " + fmt.Sprint(float64(e))
+	return fmt.Sprintf("cannot sqrt negative number: %v", float64(e))
 }
 
 func Sqrt(x float64) (float64, int, error) {
