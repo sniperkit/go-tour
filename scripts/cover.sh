@@ -13,7 +13,7 @@ test_and_cover() {
     mkdir -p "$WORKDIR"
 
     for pkg in "$@"; do
-        f="$WORKDIR/$(echo "${pkg}" | tr / -).cover"
+        f="$WORKDIR/$(echo ${pkg} | tr / -).cover"
         go test -covermode="$MODE" -coverprofile="$f" "$pkg"
     done
 
@@ -25,5 +25,5 @@ generate_html_cover_report() {
     go tool cover -html="$PROFILE" -o "$WORKDIR"/index.html
 }
 
-test_and_cover "$(go list ./...)"
+test_and_cover $(go list ./...)
 generate_html_cover_report

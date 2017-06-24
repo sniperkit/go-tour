@@ -1,7 +1,4 @@
 GOIMPORTS_FILES?=$$(find . -name '*.go')
-EXTERNAL_TOOLS=\
-	golang.org/x/tools/cmd/goimports \
-	golang.org/x/tools/cmd/cover
 
 all: goimportscheck vet test
 
@@ -25,9 +22,6 @@ vet:
 		fi
 
 bootstrap:
-	@for tool in  $(EXTERNAL_TOOLS) ; do \
-		echo "Installing/Updating $$tool" ; \
-		go get -u $$tool; \
-	done
+	@sh -c "'$(CURDIR)/scripts/bootstrap.sh'"
 
 .PHONY: all cover test goimports goimportscheck vet bootstrap
