@@ -1,6 +1,6 @@
 package slices
 
-// Creates a slice of slices by iterating dy times, iterating dx times in each iteration.
+// Pic creates a slice of slices by iterating dy times, iterating dx times in each iteration.
 // The value of elem[y][x] = x*y.
 func Pic(dx, dy int) [][]uint8 {
 	var pic [][]uint8

@@ -1,9 +1,9 @@
 package readers
 
-// A Reader
+// MyReader is a reader
 type MyReader struct{}
 
-// Reads a stream of 'A' characters into bytes.
+// Read reads a stream of 'A' characters into bytes.
 // Returns the number of bytes read and nil.
 func (MyReader) Read(bytes []byte) (n int, err error) {
 	ret := bytes[:0]

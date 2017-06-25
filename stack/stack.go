@@ -2,22 +2,22 @@ package stack
 
 import "errors"
 
-// Represents a Stack.
+// Stack is a LIFO queue.
 type Stack []interface{}
 
-// Creates a new Stack
+// New creates a new Stack
 func New() Stack {
 	return make(Stack, 0)
 }
 
-// Pushes all of v onto the stack.
+// Push pushes all of v onto the stack.
 func (s *Stack) Push(v ...interface{}) {
 	for _, i := range v {
 		*s = append(*s, i)
 	}
 }
 
-// Pops an element from the stack. An attempt to pop
+// Pop pops an element from the stack. An attempt to pop
 // an empty stack is an error.
 func (s *Stack) Pop() (interface{}, error) {
 	if s.IsEmpty() {
@@ -32,7 +32,7 @@ func (s *Stack) Pop() (interface{}, error) {
 	return ret, nil
 }
 
-// Is true if the stack is empty.
+// IsEmpty is true if the stack is empty.
 func (s Stack) IsEmpty() bool {
 	return len(s) == 0
 }

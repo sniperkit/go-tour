@@ -7,7 +7,7 @@ import (
 	"github.com/sahilm/go-tour/concurrent"
 )
 
-// A web crawler.
+// Crawler is a web crawler
 type Crawler struct {
 	url     string          // the url to crawl
 	depth   int             // max-depth of links to follow
@@ -15,7 +15,7 @@ type Crawler struct {
 	visited *concurrent.Map // Map of visited urls
 }
 
-// Returns a new crawler.
+// NewCrawler returns a new crawler.
 func NewCrawler(url string, depth int, fetcher Fetcher) *Crawler {
 	return &Crawler{
 		url:     url,
@@ -25,24 +25,24 @@ func NewCrawler(url string, depth int, fetcher Fetcher) *Crawler {
 	}
 }
 
-// The Fetcher interface
+// Fetcher can fetch web pages
 type Fetcher interface {
 	// Fetch returns a Page found at url
 	Fetch(url string) (p *Page, err error)
 }
 
-// Represents a web page
+// Page represents a web page
 type Page struct {
-	Url   string   // The page's URL
+	URL   string   // The page's URL
 	Body  string   // The body of the page
 	Links []string // The links to other pages on the page
 }
 
-// The error returned when the URL cannot be found.
-type ErrUrlNotFound string
+// ErrURLNotFound is the error representing a page that cannot be loaded.
+type ErrURLNotFound string
 
-// Error message of ErrUrlNotFound
-func (e ErrUrlNotFound) Error() string {
+// Error message of ErrURLNotFound
+func (e ErrURLNotFound) Error() string {
 	return fmt.Sprintf("%v not found", string(e))
 }
 
@@ -77,7 +77,7 @@ func crawl(url string, depth int, fetcher Fetcher, visited *concurrent.Map, page
 		return
 	}
 
-	log.Printf("Found: %s %q\n", page.Url, page.Body)
+	log.Printf("Found: %s %q\n", page.URL, page.Body)
 	*pages = append(*pages, page)
 	done := make(chan bool)
 

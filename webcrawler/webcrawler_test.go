@@ -21,13 +21,13 @@ func TestCrawler(t *testing.T) {
 	errorPage := "http://golang.org/cmd/"
 
 	for _, page := range pages {
-		if page.Url == errorPage {
+		if page.URL == errorPage {
 			t.Errorf("got error page: %v in pages", errorPage)
 		}
 	}
 
 	got := errors[0]
-	want := webcrawler.ErrUrlNotFound(errorPage)
+	want := webcrawler.ErrURLNotFound(errorPage)
 	if got != want {
 		t.Errorf("got error: %v, want error: %v", got, want)
 	}
@@ -42,9 +42,9 @@ type fakeResult struct {
 
 func (f *fakeFetcher) Fetch(url string) (*webcrawler.Page, error) {
 	if res, ok := (*f)[url]; ok {
-		return &webcrawler.Page{Url: url, Body: res.body, Links: res.urls}, nil
+		return &webcrawler.Page{URL: url, Body: res.body, Links: res.urls}, nil
 	}
-	return nil, webcrawler.ErrUrlNotFound(url)
+	return nil, webcrawler.ErrURLNotFound(url)
 }
 
 var fetcher = &fakeFetcher{

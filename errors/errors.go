@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-// Type representing an error which occurs when
+// ErrNegativeSqrt represents an error which occurs when
 // the square root of a negative number is requested.
 type ErrNegativeSqrt float64
 
@@ -14,7 +14,7 @@ func (e ErrNegativeSqrt) Error() string {
 	return fmt.Sprintf("cannot sqrt negative number: %v", float64(e))
 }
 
-// Calculates the square root of x using the Newton-Raphson method.
+// Sqrt calculates the square root of x using the Newton-Raphson method.
 // For positive values of x, the square root, number of iterations to process the result
 // and nil error is returned. A ErrNegativeSqrt is returned if x is negative.
 func Sqrt(x float64) (float64, int, error) {
