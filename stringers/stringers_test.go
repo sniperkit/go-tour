@@ -26,8 +26,7 @@ func TestIPAddrIsAStringer(t *testing.T) {
 	for _, c := range cases {
 		got := fmt.Sprint(c.in)
 		if got != c.want {
-			t.Errorf("Want: %v, but got: %v",
-				c.want, got)
+			t.Errorf("got: %v, want: %v", c.want, got)
 		}
 	}
 }

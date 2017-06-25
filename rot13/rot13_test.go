@@ -27,7 +27,7 @@ func TestRot13Reader(t *testing.T) {
 		got := string(b)
 
 		if err != nil {
-			t.Errorf("Expected no error but got: %v", err)
+			t.Errorf("got error: %v, want no error", err)
 		}
 
 		if got != c.want {

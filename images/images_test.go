@@ -16,7 +16,7 @@ func TestImage(t *testing.T) {
 	want := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAIAAAAW4yFwAAAAFElEQVR4nGKaePMSEwMDAyAAAP//DUcCQYPeckYAAAAASUVORK5CYII="
 
 	if got != want {
-		t.Errorf("want: %v but got: %v", want, got)
+		t.Errorf("got: %v, want: %v", got, want)
 	}
 }
 

@@ -7,14 +7,9 @@ import (
 )
 
 func TestPic(t *testing.T) {
-	got := slices.Pic(4, 4)
-	actualLength := len(got)
-	t.Log(got)
-	expectedLength := 4
-	if actualLength != expectedLength {
-		t.Errorf("Expected len(pic(4,4)): "+
-			"%d, got: %d",
-			expectedLength,
-			actualLength)
+	got := len(slices.Pic(4, 4))
+	want := 4
+	if got != want {
+		t.Errorf("got len: %v, want len: %v", got, want)
 	}
 }

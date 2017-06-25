@@ -10,18 +10,18 @@ import (
 func TestStack(t *testing.T) {
 	s := stack.New()
 	if !s.IsEmpty() {
-		t.Errorf("expected empty stack but got: %v", s)
+		t.Errorf("got: %v, want empty stack", s)
 	}
 
 	s.Push(1, 2, 3)
 	if s.IsEmpty() {
-		t.Errorf("expected non-empty stack but got: %v", s)
+		t.Error("got empty stack, want non-empty stack")
 	}
 
 	for _, v := range []int{3, 2, 1} {
 		got, err := s.Pop()
 		if err != nil {
-			t.Errorf("expected no error but got: %v", err)
+			t.Errorf("got error: %v, want no error", err)
 		}
 		if got != v {
 			t.Errorf("got: %v, want: %v", got, v)

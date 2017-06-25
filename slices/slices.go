@@ -1,7 +1,7 @@
 package slices
 
 func Pic(dx, dy int) [][]uint8 {
-	pic := [][]uint8{}
+	var pic [][]uint8
 
 	for y := 0; y < dy; y++ {
 		xs := []uint8{}

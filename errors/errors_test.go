@@ -9,9 +9,9 @@ import (
 
 func TestSqrtErrors(t *testing.T) {
 	cases := []struct {
-		in           float64
-		want         float64
-		errorMessage string
+		in    float64
+		want  float64
+		error string
 	}{
 		{-2, 0, "cannot sqrt negative number: -2"},
 		{-100, 0, "cannot sqrt negative number: -100"},
@@ -22,19 +22,19 @@ func TestSqrtErrors(t *testing.T) {
 		got, _, err := errors.Sqrt(c.in)
 
 		if got != c.want {
-			t.Errorf("Got: %v, but want: %v", got, c.want)
+			t.Errorf("got: %v, want: %v", got, c.want)
 		}
 
 		switch err {
 		case nil:
-			if c.errorMessage != "" {
-				t.Errorf("Expected error message: %v, but got no error.", c.errorMessage)
+			if c.error != "" {
+				t.Errorf("got no error, want error: %v", c.error)
 			}
 
 		default:
-			gotErrorMessage := err.Error()
-			if gotErrorMessage != c.errorMessage {
-				t.Errorf("Expected error message: %v, but got error: %v", c.errorMessage, gotErrorMessage)
+			got := err.Error()
+			if got != c.error {
+				t.Errorf("got error: %v, want error: %v", got, c.error)
 			}
 		}
 	}

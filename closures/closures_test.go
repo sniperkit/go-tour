@@ -12,7 +12,7 @@ func TestFibonacci(t *testing.T) {
 	for i, want := range cases {
 		got := f()
 		if got != want {
-			t.Errorf("Got: %d, Want: %d, At: %d", got, want, i)
+			t.Errorf("got: %d, want: %d, at: %d", got, want, i)
 		}
 	}
 }
