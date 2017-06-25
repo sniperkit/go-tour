@@ -5,10 +5,13 @@ import (
 	"unicode"
 )
 
+// A rot13 reader
 type Reader struct {
 	R io.Reader
 }
 
+// Reads p converting it into a rot13 encoded byte array.
+// Returns the number of bytes read and nil error.
 func (reader Reader) Read(p []byte) (n int, err error) {
 	n, err = reader.R.Read(p)
 	b := p[:0]

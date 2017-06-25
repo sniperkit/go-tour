@@ -2,48 +2,57 @@ package webcrawler
 
 import (
 	"fmt"
-
 	"log"
 
 	"github.com/sahilm/go-tour/concurrent"
 )
 
+// A web crawler.
 type Crawler struct {
-	Url     string
-	depth   int
-	fetcher Fetcher
-	visited *concurrent.Map
+	url     string          // the url to crawl
+	depth   int             // max-depth of links to follow
+	fetcher Fetcher         // Fetcher to use
+	visited *concurrent.Map // Map of visited urls
 }
 
+// Returns a new crawler.
 func NewCrawler(url string, depth int, fetcher Fetcher) *Crawler {
 	return &Crawler{
-		Url:     url,
+		url:     url,
 		depth:   depth,
 		fetcher: fetcher,
 		visited: concurrent.NewMap(),
 	}
 }
 
+// The Fetcher interface
 type Fetcher interface {
+	// Fetch returns a Page found at url
 	Fetch(url string) (p *Page, err error)
 }
 
+// Represents a web page
 type Page struct {
-	Url   string
-	Body  string
-	Links []string
+	Url   string   // The page's URL
+	Body  string   // The body of the page
+	Links []string // The links to other pages on the page
 }
 
+// The error returned when the URL cannot be found.
 type ErrUrlNotFound string
 
+// Error message of ErrUrlNotFound
 func (e ErrUrlNotFound) Error() string {
 	return fmt.Sprintf("%v not found", string(e))
 }
 
+// Crawl uses fetcher to recursively crawl
+// pages starting with url, to a maximum of depth.
+// Returns all pages found and errors collected.
 func (c *Crawler) Crawl() ([]*Page, []error) {
 	var pages []*Page
 	var errors []error
-	crawl(c.Url, c.depth, c.fetcher, c.visited, &pages, &errors)
+	crawl(c.url, c.depth, c.fetcher, c.visited, &pages, &errors)
 	return pages, errors
 }
 

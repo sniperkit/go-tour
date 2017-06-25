@@ -2,6 +2,9 @@ package loopsandfunctions
 
 import "math"
 
+// Calculates the square root of x using the Newton-Raphson method.
+// For positive values of x, the square root and number of iterations to process the result
+// are returned. The behaviour is undefined for negative values of x.
 func Sqrt(x float64) (float64, int) {
 	const minDelta = 1e-8
 	z := 1.0

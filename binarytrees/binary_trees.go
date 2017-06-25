@@ -5,6 +5,8 @@ import (
 	"golang.org/x/tour/tree"
 )
 
+// Iteratively traverses binary tree t in-order
+// and publishes found nodes on channel c.
 func Walk(t *tree.Tree, c chan int) {
 	defer close(c)
 
@@ -21,6 +23,8 @@ func Walk(t *tree.Tree, c chan int) {
 	}
 }
 
+// Is true if the traversal of t1 and t2
+// yield the same nodes else is false.
 func Same(t1, t2 *tree.Tree) bool {
 	c1 := make(chan int)
 	go Walk(t1, c1)
