@@ -1,3 +1,4 @@
+// Adapted from the official solution with the following copyright: Copyright 2012 The Go Authors.  All rights reserved.
 package webcrawler
 
 import (
