@@ -84,10 +84,6 @@ func crawl(url string, depth int, fetcher Fetcher, visited *concurrent.Map, page
 
 	page, err := fetcher.Fetch(url)
 
-	// Indicate that the url has been crawled. Others will notice this
-	// when they they try a PutIfAbsent.
-	visited.Put(url, sentinel)
-
 	if err != nil {
 		errors.Append(err)
 		return
