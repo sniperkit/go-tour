@@ -28,20 +28,3 @@ func (m *Map) PutIfAbsent(k string, v interface{}) (interface{}, bool) {
 	m.mutex.Unlock()
 	return v, true
 }
-
-// Put (k,v) are put into the map. The existing value at k (if any) is
-// overwritten.
-func (m *Map) Put(k string, v interface{}) {
-	m.mutex.Lock()
-	m.data[k] = v
-	m.mutex.Unlock()
-}
-
-// Get If the key k exists in the map, the value at k and true is returned.
-// Otherwise a non-deterministic value and false is returned.
-func (m *Map) Get(k string) (interface{}, bool) {
-	m.mutex.Lock()
-	v, ok := m.data[k]
-	m.mutex.Unlock()
-	return v, ok
-}
