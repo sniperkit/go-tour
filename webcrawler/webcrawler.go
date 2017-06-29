@@ -3,7 +3,6 @@ package webcrawler
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/sahilm/go-tour/concurrent"
 )
@@ -51,49 +50,56 @@ func (e ErrURLNotFound) Error() string {
 // pages starting with url, to a maximum of depth.
 // Returns all pages found and errors collected.
 func (c *Crawler) Crawl() ([]*Page, []error) {
+	p := concurrent.NewSlice()
+	e := concurrent.NewSlice()
+
+	crawl(c.url, c.depth, c.fetcher, c.visited, p, e)
+
+	pView := p.View()
 	var pages []*Page
+	for i := 0; i < len(pView); i++ {
+		pages = append(pages, pView[i].(*Page))
+	}
+
+	eView := e.View()
 	var errors []error
-	crawl(c.url, c.depth, c.fetcher, c.visited, &pages, &errors)
+	for i := 0; i < len(eView); i++ {
+		errors = append(errors, eView[i].(error))
+	}
 	return pages, errors
 }
 
-func crawl(url string, depth int, fetcher Fetcher, visited *concurrent.Map, pages *[]*Page, errors *[]error) {
+var sentinel = struct{}{}
+
+func crawl(url string, depth int, fetcher Fetcher, visited *concurrent.Map, pages *concurrent.Slice, errors *concurrent.Slice) {
 	if depth <= 0 {
-		log.Printf("<- Done with %v, depth 0.\n", url)
 		return
 	}
 
-	_, ok := visited.PutIfAbsent(url, struct{}{})
+	_, ok := visited.PutIfAbsent(url, sentinel)
 	if !ok {
-		log.Printf("<- Done with %v, already visited.\n", url)
 		return
 	}
 
 	page, err := fetcher.Fetch(url)
-	visited.Put(url, struct{}{})
+	visited.Put(url, sentinel)
 
 	if err != nil {
-		log.Printf("<- Error on %v: %v\n", url, err)
-		*errors = append(*errors, err)
+		errors.Append(err)
 		return
 	}
 
-	log.Printf("Found: %s %q\n", page.URL, page.Body)
-	*pages = append(*pages, page)
+	pages.Append(page)
 	done := make(chan bool)
 
-	for i, l := range page.Links {
-		log.Printf("-> Crawling child %v/%v of %v : %v.\n", i, len(page.Links), url, l)
+	for _, url := range page.Links {
 		go func(url string) {
 			crawl(url, depth-1, fetcher, visited, pages, errors)
 			done <- true
-		}(l)
+		}(url)
 	}
 
-	for i := range page.Links {
-		log.Printf("<- [%v] %v/%v Waiting for child %v.\n", url, i, len(page.Links), page.Links[i])
+	for range page.Links {
 		<-done
 	}
-
-	log.Printf("<- Done with %v\n", url)
 }
