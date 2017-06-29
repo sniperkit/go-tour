@@ -8,10 +8,9 @@ import (
 
 // Crawler is a web crawler
 type Crawler struct {
-	url     string          // the url to crawl
-	depth   int             // max-depth of links to follow
-	fetcher Fetcher         // Fetcher to use
-	visited *concurrent.Map // Map of visited urls
+	url     string  // the url to crawl
+	depth   int     // max-depth of links to follow
+	fetcher Fetcher // Fetcher to use
 }
 
 // NewCrawler returns a new crawler.
@@ -20,7 +19,6 @@ func NewCrawler(url string, depth int, fetcher Fetcher) *Crawler {
 		url:     url,
 		depth:   depth,
 		fetcher: fetcher,
-		visited: concurrent.NewMap(),
 	}
 }
 
@@ -51,8 +49,9 @@ func (e ErrURLNotFound) Error() string {
 func (c *Crawler) Crawl() ([]*Page, []error) {
 	p := concurrent.NewSlice()
 	e := concurrent.NewSlice()
+	v := concurrent.NewMap()
 
-	crawl(c.url, c.depth, c.fetcher, c.visited, p, e)
+	crawl(c.url, c.depth, c.fetcher, v, p, e)
 
 	pView := p.View()
 	var pages []*Page
