@@ -1,9 +1,12 @@
 GOIMPORTS_FILES?=$$(find . -name '*.go')
 
-all: goimportscheck vet test
+all: goimportscheck vet megacheck test
 
 cover: goimportscheck vet
 	@sh -c "'$(CURDIR)/scripts/cover.sh'"
+
+megacheck:
+	@megacheck ./...
 
 test:
 	@go test ./...

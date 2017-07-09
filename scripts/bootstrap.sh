@@ -4,6 +4,7 @@ EXTERNAL_DEPS=$(cat <<- END
     golang.org/x/tools/cmd/goimports
     golang.org/x/tools/cmd/cover
     golang.org/x/tour/tree
+    honnef.co/go/tools/cmd/megacheck
 END
 )
 
