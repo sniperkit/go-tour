@@ -14,9 +14,11 @@ type Reader struct {
 // Returns the number of bytes read and nil error.
 func (reader Reader) Read(p []byte) (n int, err error) {
 	n, err = reader.R.Read(p)
-	b := p[:0]
+	if err != nil {
+		return
+	}
 	for i := 0; i < n; i++ {
-		b = append(b, toRot13(p[i]))
+		p[i] = toRot13(p[i])
 	}
 	return
 }
